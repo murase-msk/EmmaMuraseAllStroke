@@ -1,0 +1,69 @@
+<!DOCTYPE html><!-- ドキュメントタイプを宣言する(html5) -->
+<html lang='ja'>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"><!-- 文字コード指定？ -->
+<meta http-equiv="Content-Script-Type" content="text/javascript"><!-- デフォルトのスクリプト言語の指定 -->
+<meta http-equiv="pragma" content="non-cache"><!-- キャッシュ見ない -->
+<meta http-equiv="cache-control" content="non-cache"><!-- キャッシュ見ない -->
+<meta http-equiv="expires" content="0"><!-- キャッシュ見ない -->
+<title>EmmaっぽいWebMap</title>
+
+<!-- css読み込み -->
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+<!-- jquery -->
+<script type="text/javascript" src="js/lib/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="js/lib/jquery-ui-1.11.4.min.js"></script>
+<script type="text/javascript" src="js/lib/jquery.mousewheel.min.js"></script>
+<!-- global numver -->
+<script type="text/javascript" src="js/globalStaticNumber.js"></script>
+<!-- デバッグ用 -->
+<!--<script type="text/javascript" src="js/pMethod.js"></script>-->
+
+
+<!-- leaflet-->
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+<!--[if lte IE 8]>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+<![endif]-->
+<script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+<script type="text/javascript" src="js/lib/leaflet.ajax.min.js"></script>
+
+<!-- 独自処理 -->
+<script type="text/javascript" src="js/init.js"></script>	<!-- 初期処理 -->
+<script type="text/javascript" src="js/initLeafletMap.js"></script>	<!-- 初期処理 -->
+<script type="text/javascript" src="js/drawMap.js"></script>	<!-- 地図描画処理 -->
+<!-- イベント取得 -->
+<script type="text/javascript" src="js/event/resizeEvent.js"></script>
+<script type="text/javascript" src="js/event/dragDropEvent.js"></script>
+<script type="text/javascript" src="js/event/wheelEvent.js"></script>
+<script type="text/javascript" src="js/event/mouseMoveEvent.js"></script>
+
+
+<script type="text/javascript" src="js/post.js"></script>	<!-- 後処理 -->
+</head>
+
+
+<body id='body_element' style="margin: 0px 0px 0px 0px;">
+
+<!-- 全コンテンツ -->
+<div id='contents'>
+	<!-- 地図パネル -->
+	<div id ='map_panel'>
+		<div id='map_element' style='width: 800px; height: 800px; border: solid 0px #999; z-index: 0;'></div>
+		<div id = 'focus_glue_layer'>
+			<canvas id="layer1" class="glueOuterSize" width="400" height="400" style="position: absolute; left: 0px; top: 0px; width: 400px; height: 400px; border-radius:400px;z-index: 1;"></canvas>
+			<canvas id="layer2" class="glueInnerSize" width="250" height="250" style="position: absolute; left: 0px; top: 0px; width: 250px; height: 250px; border-radius:250px;z-index: 2;"></canvas>
+			<canvas id="layer3" class="glueOuterSize" width="400" height="400" style="position: absolute; left: 0px; top: 0px; width: 400px; height: 400px; border-radius:400px;z-index: 3;"></canvas>
+		</div>
+	</div>
+	<div id = "select_menu">
+		<select name="glue_style" style="position: absolute; left: 100px; top: 180px;  z-index: 3;"> 
+			<option value="roadGlueCar">roadGlueCar</option> 
+			<option value="roadGlueAll">roadGlueAll</option> 
+			<option value="strokeGlue" selected>strokeGlue</option> 
+		</select>
+	</div>
+</div>
+
+</body>
+</html>
