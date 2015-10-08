@@ -12,26 +12,25 @@ $(function(){
 	var tile2Layer = L.tileLayer('http://tsgMapServer.elcom.nitech.ac.jp/osm/{z}/{x}/{y}.png', {
 		attribution : '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 	});
-	tile2Layer.addTo(map);
+//	tile2Layer.addTo(map);
 	// // OSMのタイルレイヤーを追加
 	var tileLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 		attribution : '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 	});
-	tileLayer.addTo(map);
-	
-	//.
+//	tileLayer.addTo(map);
+	// ただのグレーの画像.
 	var grayLayer = L.tileLayer('http://localhost/myTile/background.png', {
 		attribution : '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 	});
-	grayLayer.addTo(map);
+	grayLayer.addTo(map);	// このレイヤーをデフォルトで表示する.
 
 
 	// レイヤーの構成
 	// ベースレイヤー(デフォルト表示).
 	var baseLayers = {
+			"gray":grayLayer,
 			"OpenStreetMap": tileLayer,
 			"localOSM":tile2Layer,
-			"gray":grayLayer,
 	};
 	
 	
@@ -266,7 +265,4 @@ $(function(){
 		return url;
 	}
 
-	
-	
-	
 });

@@ -60,6 +60,16 @@ DrawMap.prototype.drawGlue = function (lng, lat, focus_zoom_level, context_zoom_
 	"&roadType=" +"car"+
 	"?" + new Date().getTime();
     
+    var elasticStrokeConn = "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
+	"type="+"DrawElasticStrokeConnectivity"+
+	"&centerLngLat="+lng+","+lat+
+	"&focus_zoom_level="+focus_zoom_level+
+	"&context_zoom_level="+context_zoom_level+
+	"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
+	"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
+	"&roadType=" +"car"+
+	"?" + new Date().getTime();
+    
     // ラジオボタンの選択状態でどのglueを使うか決める.
     switch($("select[name='glue_style'] option:selected").val()){
     case "roadGlueCar":
@@ -70,6 +80,9 @@ DrawMap.prototype.drawGlue = function (lng, lat, focus_zoom_level, context_zoom_
     	break;
     case "strokeGlue":
     	img.src = elasticStroke;
+    	break;
+    case "strokeGlueConn":
+    	img.src = elasticStrokeConn;
     	break;
     }
     	
@@ -107,6 +120,5 @@ DrawMap.prototype.drawFocus = function (lng, lat, zoom_level){
 		//console.log(context.drawImage(img, 0, 0, 400, 400));
 		context.drawImage(img, 0, 0);
 	};
-
 }
 

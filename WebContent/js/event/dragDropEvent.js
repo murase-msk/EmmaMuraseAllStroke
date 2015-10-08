@@ -99,9 +99,9 @@ DragDropEvent.prototype={
 		        			y:e.pageY - Number.parseInt($("#layer3").position().top)-g_GlobalStaticNumber.glueOuterRadius};// glue中心からの距離.
 		        	var r = Math.sqrt(Math.pow(xy.x, 2) + Math.pow(xy.y, 2));	// その長さ.
 		           if(glueOuterOverFlg && dragDropEvent.isUpdate(e, GLUE_CHANGE_RADIUS_INTARVAL)){
-		        	   g_buttonEvent.changeGlueOuterRadiusNotGlue(Number.parseInt(r-g_GlobalStaticNumber.glueOuterRadius));	// glue外側境界の大きさを変える.
+		        	   dragDropEvent.changeGlueOuterRadiusNotGlue(Number.parseInt(r-g_GlobalStaticNumber.glueOuterRadius));	// glue外側境界の大きさを変える.
 		           }else if (glueInnerOverFlg && dragDropEvent.isUpdate(e, FOCUS_UPDATE_INTARVAL)){
-		        	   g_buttonEvent.changeGlueInnerRadius(Number.parseInt(r-g_GlobalStaticNumber.glueInnerRadius));	// glue内側境界の大きさを変える.
+		        	   dragDropEvent.changeGlueInnerRadius(Number.parseInt(r-g_GlobalStaticNumber.glueInnerRadius));	// glue内側境界の大きさを変える.
 		           }
 
 		        });
@@ -114,9 +114,9 @@ DragDropEvent.prototype={
 	        			y:e.pageY - Number.parseInt($("#layer3").position().top)-g_GlobalStaticNumber.glueOuterRadius};// glue中心からの距離.
 	        	var r = Math.sqrt(Math.pow(xy.x, 2) + Math.pow(xy.y, 2));	// その長さ.
 	           if(glueOuterOverFlg){
-	        	   g_buttonEvent.changeGlueOuterRadius(Number.parseInt(r-g_GlobalStaticNumber.glueOuterRadius));	// glue外側境界の大きさを変える.
+	        	   dragDropEvent.changeGlueOuterRadius(Number.parseInt(r-g_GlobalStaticNumber.glueOuterRadius));	// glue外側境界の大きさを変える.
 	           }else if (glueInnerOverFlg){
-	        	   g_buttonEvent.changeGlueInnerRadius(Number.parseInt(r-g_GlobalStaticNumber.glueInnerRadius));	// glue内側境界の大きさを変える.
+	        	   dragDropEvent.changeGlueInnerRadius(Number.parseInt(r-g_GlobalStaticNumber.glueInnerRadius));	// glue内側境界の大きさを変える.
 	           }
 		        $(document).off("mousemove");
 		    });
@@ -132,6 +132,53 @@ DragDropEvent.prototype={
 		}
 		else return false;
 	},
+	
+	
+	/**
+	 * glue外側の大きさを変える
+	 * changeRadiusが正なら大きく，負なら小さく
+	 */
+	changeGlueOuterRadius: function(changeRadius){
+		this.changeGlueOuterRadiusNotGlue(changeRadius);
+		g_drawMap.drawFocusGlue();
+		
+	},
+	changeGlueOuterRadiusNotGlue: function(changeRadius){
+		var buttonEvent = this;
+		g_GlobalStaticNumber.glueOuterRadius += changeRadius;	// 指定した分大きさを変える.
+		var top = Number.parseInt($(".glueOuterSize").css("top").slice(0,-2), 10);
+		var left = Number.parseInt($(".glueOuterSize").css("left").slice(0,-2), 10);
+		g_GlobalStaticNumber.gluePositionXy = {x: left-changeRadius , y: top-changeRadius};	// g_globalStaticNumberの値を更新する.
+		$(".glueOuterSize").each(function(){	// 各glueサイズのオブジェクトに対して大きさを大きくする処理をする.
+			$(this).css('width',g_GlobalStaticNumber.glueOuterRadius*2);
+			$(this).css('height',g_GlobalStaticNumber.glueOuterRadius*2);
+			$(this).attr('width', g_GlobalStaticNumber.glueOuterRadius*2);
+			$(this).attr('height', g_GlobalStaticNumber.glueOuterRadius*2);
+			$(this).css('top', (top-changeRadius)+"px");
+			$(this).css('left', (left-changeRadius)+"px");
+		});
+	},
+	/**
+	 * glue内側の大きさを変える
+	 * changeRadiusが正なら大きく，負なら小さく
+	 */
+	changeGlueInnerRadius: function(changeRadius){
+		var buttonEvent = this;
+		var g_ = g_GlobalStaticNumber;
+		g_GlobalStaticNumber.glueInnerRadius += changeRadius;	// 指定した分大きさを変える.
+		var top = Number.parseInt($(".glueInnerSize").css("top").slice(0,-2), 10);
+		var left = Number.parseInt($(".glueInnerSize").css("left").slice(0,-2), 10);
+		$(".glueInnerSize").each(function(){
+			$(this).css('width',g_GlobalStaticNumber.glueInnerRadius*2);
+			$(this).css('height',g_GlobalStaticNumber.glueInnerRadius*2);
+			$(this).attr('width', g_GlobalStaticNumber.glueInnerRadius*2);
+			$(this).attr('height', g_GlobalStaticNumber.glueInnerRadius*2);
+			$(this).css('top', (top-changeRadius)+"px");
+			$(this).css('left', (left-changeRadius)+"px");
+		});
+		g_drawMap.drawFocusGlue();
+	},
+
 };
 
 
