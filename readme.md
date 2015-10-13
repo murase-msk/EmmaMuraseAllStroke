@@ -1,12 +1,14 @@
 # description
 
+<http://gitlab.yamamoto.nitech.ac.jp/murase_masaki/EmmaMurase>
+からこちらに移行した
 
 EMMAのクライアント(Javascript)
 
 <http://133.68.13.112:8080/EmmaMuraseAllStroke/>
 
 
-- ![p1](muraseEmma.png)
+- ![p1](img/p1.png)
 
 # バージョン履歴
 
