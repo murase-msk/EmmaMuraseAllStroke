@@ -112,7 +112,7 @@ DrawMap.prototype.drawFocus = function (lng, lat, zoom_level){
     		"&size="+(g_GlobalStaticNumber.glueInnerRadius*2)+"x"+(g_GlobalStaticNumber.glueInnerRadius*2)+"" +
     		"&maptype=mapnik_local"+
     		"?" + new Date().getTime();
-    console.log(img.src);
+//    console.log(img.src);
 	// 画像読込みを待って、処理続行 
 	img.onload = function() {
 		//refer to http://www.html5.jp/canvas/how6.html

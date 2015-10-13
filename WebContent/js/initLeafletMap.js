@@ -12,7 +12,7 @@ $(function(){
 	var tile2Layer = L.tileLayer('http://tsgMapServer.elcom.nitech.ac.jp/osm/{z}/{x}/{y}.png', {
 		attribution : '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 	});
-//	tile2Layer.addTo(map);
+//	tile2Layer.addTo(map);// このレイヤーをデフォルトで表示する.
 	// // OSMのタイルレイヤーを追加
 	var tileLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 		attribution : '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -25,13 +25,7 @@ $(function(){
 	grayLayer.addTo(map);	// このレイヤーをデフォルトで表示する.
 
 
-	// レイヤーの構成
-	// ベースレイヤー(デフォルト表示).
-	var baseLayers = {
-			"gray":grayLayer,
-			"OpenStreetMap": tileLayer,
-			"localOSM":tile2Layer,
-	};
+
 	
 	
 	// 描画のスタイル設定.
@@ -86,11 +80,6 @@ $(function(){
 		    "opacity": 1
 		};
 	// ストロークの表示.
-//	var newStroke;	// 描画するストローク.
-//	var previousStroke;	// 前回のデータを保持する.;
-//	var newStroke_waku2;
-//	var previousStroke_waku2;
-
 	var newStroke_blackDash;
 	var previousStroke_blackDash;
 	var newStroke_whiteShort;
@@ -112,17 +101,6 @@ $(function(){
 
 
 	// ストロークの表示(初回).
-	// 外枠.
-//	newStroke = new L.GeoJSON.AJAX(drawStrokeUrl("32,41,42") ,{style:strokeStyle});
-//	newStroke.addTo(map);
-//	newStrokeu = new L.GeoJSON.AJAX(drawStrokeUrl("31") ,{style:strokeStyle});
-//	newStroke.addTo(map);
-//	newStroke = new L.GeoJSON.AJAX(drawStrokeUrl("21,22") ,{style:strokeStyle});
-//	newStroke.addTo(map);
-//	newStroke = new L.GeoJSON.AJAX(drawStrokeUrl("15,16") ,{style:strokeStyle});
-//	newStroke.addTo(map);
-//	newStroke_waku2 = new L.GeoJSON.AJAX(drawRoadUrl("car") ,{style:strokeStyle});
-//	newStroke_waku2.addTo(map);
 	// 中身.
 	newStroke_white = new L.GeoJSON.AJAX(drawStrokeUrl("32,41,42") ,{style:strokeStyle_white});
 	newStroke_white.addTo(map);
@@ -141,7 +119,7 @@ $(function(){
 	newStroke_blackDash = new L.GeoJSON.AJAX(drawRoadUrl("rail") ,{style:strokeStyle_blackDash});
 	newStroke_blackDash.addTo(map);
 	
-	// オーバーレイレイヤー(表示するかの選択可能).
+/*	// オーバーレイレイヤー(表示するかの選択可能).
 	var overlays = {
 //			"stroke": newStroke,
 			"stroke_white": newStroke_white,
@@ -153,7 +131,21 @@ $(function(){
 			"white":newStroke_whiteShort,
 			"stroke_blackDash": newStroke_blackDash,
 	};
-	L.control.layers(baseLayers, overlays).addTo(map);
+*/	
+	// レイヤーをまとめる.
+//	var vectorGroupLayer = L.layerGroup(newStroke_white, newStroke_yellow, newStroke_orange, newStroke_red, newStroke_green, newStroke_blue, newStroke_whiteShort, newStroke_blackDash);
+	
+	
+	// レイヤーの構成
+	// ベースレイヤー(デフォルト表示).
+	var baseLayers = {
+			"gray":grayLayer,
+			"OpenStreetMap": tileLayer,
+			"localOSM":tile2Layer,
+//			"vector":vectorGroupLayer,
+	};
+	
+	L.control.layers(baseLayers).addTo(map);
 
 	// add control scale
 	L.control.scale().addTo(map);
@@ -199,8 +191,6 @@ $(function(){
 	 */
 	function drawStroke(){
 		console.log('drawStroke');
-//		previousStroke = newStroke;
-//		previousStroke_waku2 = newStroke_waku2;
 		previousStroke_blackDash = newStroke_blackDash;
 		previousStroke_whiteShort = newStroke_whiteShort;
 		previousStroke_blue = newStroke_blue;
@@ -210,9 +200,6 @@ $(function(){
 		previousStroke_yellow = newStroke_yellow;
 		previousStroke_white = newStroke_white;
 		
-
-//		map.removeLayer(previousStroke);
-//		map.removeLayer(previousStroke_waku2);
 		map.removeLayer(previousStroke_blackDash);
 		map.removeLayer(previousStroke_whiteShort);
 		map.removeLayer(previousStroke_blue);
@@ -224,11 +211,6 @@ $(function(){
 		// コンソールにurlを表示.
 		console.log(drawStrokeUrl());
 		// // ストロークの表示(再描画).
-		// 外枠.
-//		newStroke_waku = new L.GeoJSON.AJAX(drawStrokeUrl("13,14,15,16,21,22,31,32,41,42") ,{style:strokeStyle});
-//		newStroke_waku.addTo(map);
-//		newStroke_waku2 = new L.GeoJSON.AJAX(drawRoadUrl("car") ,{style:strokeStyle});
-//		newStroke_waku2.addTo(map);
 		// 中身.
 		newStroke_white = new L.GeoJSON.AJAX(drawStrokeUrl("32,41,42") ,{style:strokeStyle_white});
 		newStroke_white.addTo(map);
