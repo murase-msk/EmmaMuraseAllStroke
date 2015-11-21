@@ -19,7 +19,7 @@ $(function(){
 	});
 //	tileLayer.addTo(map);
 	// ただのグレーの画像.
-	var grayLayer = L.tileLayer('http://localhost/myTile/background.png', {
+	var grayLayer = L.tileLayer('http://murase.elcom.nitech.ac.jp/myTile/background.png', {
 		attribution : '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 	});
 	grayLayer.addTo(map);	// このレイヤーをデフォルトで表示する.
