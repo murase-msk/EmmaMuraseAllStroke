@@ -150,8 +150,11 @@ DragDropEvent.prototype={
 		var left = Number.parseInt($(".glueOuterSize").css("left").slice(0,-2), 10);
 		g_GlobalStaticNumber.gluePositionXy = {x: left-changeRadius , y: top-changeRadius};	// g_globalStaticNumberの値を更新する.
 		$(".glueOuterSize").each(function(){	// 各glueサイズのオブジェクトに対して大きさを大きくする処理をする.
-			$(this).css('width',g_GlobalStaticNumber.glueOuterRadius*2);
-			$(this).css('height',g_GlobalStaticNumber.glueOuterRadius*2);
+//			$(this).width(g_GlobalStaticNumber.glueOuterRadius*2);
+//			$(this).height(g_GlobalStaticNumber.glueOuterRadius*2);
+			$(this).css('width',  g_GlobalStaticNumber.glueOuterRadius*2+"px");
+			$(this).css('height', g_GlobalStaticNumber.glueOuterRadius*2+"px");
+			$(this).css('border-radius', g_GlobalStaticNumber.glueOuterRadius*2+"px");
 			$(this).attr('width', g_GlobalStaticNumber.glueOuterRadius*2);
 			$(this).attr('height', g_GlobalStaticNumber.glueOuterRadius*2);
 			$(this).css('top', (top-changeRadius)+"px");
@@ -169,8 +172,11 @@ DragDropEvent.prototype={
 		var top = Number.parseInt($(".glueInnerSize").css("top").slice(0,-2), 10);
 		var left = Number.parseInt($(".glueInnerSize").css("left").slice(0,-2), 10);
 		$(".glueInnerSize").each(function(){
-			$(this).css('width',g_GlobalStaticNumber.glueInnerRadius*2);
-			$(this).css('height',g_GlobalStaticNumber.glueInnerRadius*2);
+//			$(this).width(g_GlobalStaticNumber.glueInnerRadius*2);
+//			$(this).height(g_GlobalStaticNumber.glueInnerRadius*2);
+			$(this).css('width',g_GlobalStaticNumber.glueInnerRadius*2+"px");
+			$(this).css('height',g_GlobalStaticNumber.glueInnerRadius*2+"px");
+			$(this).css('border-radius',g_GlobalStaticNumber.glueInnerRadius*2+"px");
 			$(this).attr('width', g_GlobalStaticNumber.glueInnerRadius*2);
 			$(this).attr('height', g_GlobalStaticNumber.glueInnerRadius*2);
 			$(this).css('top', (top-changeRadius)+"px");
