@@ -31,7 +31,7 @@ DrawMap.prototype.drawGlue = function (lng, lat, focus_zoom_level, context_zoom_
     var context = canvas.getContext('2d');
     var img = new Image();      //Image obj作成
     //ブラウザのcache対策 
-    var elasticRoadCar = "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
+/*    var elasticRoadCar = "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
     		"type="+"DrawElasticRoad"+
     		"&centerLngLat="+lng+","+lat+
     		"&focus_zoom_level="+focus_zoom_level+
@@ -79,9 +79,61 @@ DrawMap.prototype.drawGlue = function (lng, lat, focus_zoom_level, context_zoom_
 	"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
 	"&roadType=" +"car"+
 	"?" + new Date().getTime();
+*/    
+    var glueImageArray = {
+    		roadGlueCar: "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
+    		"type="+"DrawElasticRoad"+
+    		"&centerLngLat="+lng+","+lat+
+    		"&focus_zoom_level="+focus_zoom_level+
+    		"&context_zoom_level="+context_zoom_level+
+    		"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
+    		"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
+    		"&roadType=" +"car",
+    		roadGlueAll : "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
+    		"type="+"DrawElasticRoad"+
+    		"&centerLngLat="+lng+","+lat+
+    		"&focus_zoom_level="+focus_zoom_level+
+    		"&context_zoom_level="+context_zoom_level+
+    		"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
+    		"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
+    		"&roadType=" +"all",
+    		strokeGlue : "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
+    		"type="+"DrawElasticStroke_v2"+
+    		"&centerLngLat="+lng+","+lat+
+    		"&focus_zoom_level="+focus_zoom_level+
+    		"&context_zoom_level="+context_zoom_level+
+    		"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
+    		"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
+    		"&roadType=" +"car",
+    		strokeGlueConn : "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
+    		"type="+"DrawElasticStrokeConnectivity"+
+    		"&centerLngLat="+lng+","+lat+
+    		"&focus_zoom_level="+focus_zoom_level+
+    		"&context_zoom_level="+context_zoom_level+
+    		"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
+    		"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
+    		"&roadType=" +"car",
+    		mitinari : "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
+    		"type="+"DrawMitinariSenbetuAlgorithm"+
+    		"&centerLngLat="+lng+","+lat+
+    		"&focus_zoom_level="+focus_zoom_level+
+    		"&context_zoom_level="+context_zoom_level+
+    		"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
+    		"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
+    		"&roadType=" +"car",
+    		drawGlue_v2 : "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
+    		"type="+"DrawGlue_v2"+
+    		"&centerLngLat="+lng+","+lat+
+    		"&focus_zoom_level="+focus_zoom_level+
+    		"&context_zoom_level="+context_zoom_level+
+    		"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
+    		"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
+    		"&roadType=" +"car",
+    };
     
     // ラジオボタンの選択状態でどのglueを使うか決める.
-    switch($("select[name='glue_style'] option:selected").val()){
+    img.src = glueImageArray[$("select[name='glue_style'] option:selected").val()];
+/*    switch($("select[name='glue_style'] option:selected").val()){
     case "roadGlueCar":
     	img.src = elasticRoadCar;
     	break;
@@ -98,9 +150,8 @@ DrawMap.prototype.drawGlue = function (lng, lat, focus_zoom_level, context_zoom_
     	img.src = mitinari;
     	break;
     default:
-    	
     }
-    	
+*/    	
     console.log(img.src);
 	// 画像読込みを待って、処理続行 
 	img.onload = function() {
@@ -135,5 +186,5 @@ DrawMap.prototype.drawFocus = function (lng, lat, zoom_level){
 		//console.log(context.drawImage(img, 0, 0, 400, 400));
 		context.drawImage(img, 0, 0);
 	};
-}
+};
 
