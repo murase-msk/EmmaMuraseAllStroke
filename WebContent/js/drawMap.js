@@ -96,7 +96,7 @@ DrawMap.prototype.drawGlue = function (lng, lat, focus_zoom_level, context_zoom_
     		"&context_zoom_level="+context_zoom_level+
     		"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
     		"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
-    		"&roadType=" +"all",
+    		"&roadType=" +"all&isDrawPolygon=true",
     		strokeGlue : "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
     		"type="+"DrawElasticStroke_v2"+
     		"&centerLngLat="+lng+","+lat+

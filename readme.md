@@ -5,8 +5,9 @@
 
 EMMAのクライアント(Javascript)
 
-<http://133.68.13.112:8080/EmmaMuraseAllStroke/>
+研究室内から<http://murase.elcom.nitech.ac.jp:8080/EmmaMuraseAllStroke/>
 
+一般公開<http://52.193.53.55/emmaMurase/>
 
 - ![p1](img/p1.png)
 
