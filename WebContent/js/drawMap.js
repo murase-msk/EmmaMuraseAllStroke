@@ -8,11 +8,17 @@ function DrawMap(){
  * focusとglueの描画
  */
 DrawMap.prototype.drawFocusGlue = function(){
+//	g_drawMap.drawGlue(
+//			g_GlobalStaticNumber.upperLeftLngLat.lng + (g_GlobalStaticNumber.gluePositionXy.x+g_GlobalStaticNumber.glueOuterRadius) * g_GlobalStaticNumber.lnglatPer1px.lng, 
+//			g_GlobalStaticNumber.upperLeftLngLat.lat - (g_GlobalStaticNumber.gluePositionXy.y+g_GlobalStaticNumber.glueOuterRadius) * g_GlobalStaticNumber.lnglatPer1px.lat,
+//			g_GlobalStaticNumber.focusScale,
+//			g_GlobalStaticNumber.contextScale);
 	g_drawMap.drawGlue(
 			g_GlobalStaticNumber.upperLeftLngLat.lng + (g_GlobalStaticNumber.gluePositionXy.x+g_GlobalStaticNumber.glueOuterRadius) * g_GlobalStaticNumber.lnglatPer1px.lng, 
 			g_GlobalStaticNumber.upperLeftLngLat.lat - (g_GlobalStaticNumber.gluePositionXy.y+g_GlobalStaticNumber.glueOuterRadius) * g_GlobalStaticNumber.lnglatPer1px.lat,
 			g_GlobalStaticNumber.focusScale,
 			g_GlobalStaticNumber.contextScale);
+
 	g_drawMap.drawFocus(
 			g_GlobalStaticNumber.upperLeftLngLat.lng + (g_GlobalStaticNumber.gluePositionXy.x+g_GlobalStaticNumber.glueOuterRadius) * g_GlobalStaticNumber.lnglatPer1px.lng, 
 			g_GlobalStaticNumber.upperLeftLngLat.lat - (g_GlobalStaticNumber.gluePositionXy.y+g_GlobalStaticNumber.glueOuterRadius) * g_GlobalStaticNumber.lnglatPer1px.lat,
@@ -31,57 +37,8 @@ DrawMap.prototype.drawGlue = function (lng, lat, focus_zoom_level, context_zoom_
     var context = canvas.getContext('2d');
     var img = new Image();      //Image obj作成
     //ブラウザのcache対策 
-/*    var elasticRoadCar = "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
-    		"type="+"DrawElasticRoad"+
-    		"&centerLngLat="+lng+","+lat+
-    		"&focus_zoom_level="+focus_zoom_level+
-    		"&context_zoom_level="+context_zoom_level+
-    		"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
-    		"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
-    		"&roadType=" +"car";//+
-    		//"?" + new Date().getTime();
-    var elasticRoadAll = "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
-	"type="+"DrawElasticRoad"+
-	"&centerLngLat="+lng+","+lat+
-	"&focus_zoom_level="+focus_zoom_level+
-	"&context_zoom_level="+context_zoom_level+
-	"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
-	"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
-	"&roadType=" +"all";//+
-	//"?" + new Date().getTime();
-
-    var elasticStroke = "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
-	"type="+"DrawElasticStroke"+
-	"&centerLngLat="+lng+","+lat+
-	"&focus_zoom_level="+focus_zoom_level+
-	"&context_zoom_level="+context_zoom_level+
-	"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
-	"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
-	"&roadType=" +"car"+
-	"?" + new Date().getTime();
-    
-    var elasticStrokeConn = "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
-	"type="+"DrawElasticStrokeConnectivity"+
-	"&centerLngLat="+lng+","+lat+
-	"&focus_zoom_level="+focus_zoom_level+
-	"&context_zoom_level="+context_zoom_level+
-	"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
-	"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
-	"&roadType=" +"car"+
-	"?" + new Date().getTime();
-    
-    var mitinari = "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
-	"type="+"DrawMitinariSenbetuAlgorithm"+
-	"&centerLngLat="+lng+","+lat+
-	"&focus_zoom_level="+focus_zoom_level+
-	"&context_zoom_level="+context_zoom_level+
-	"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
-	"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
-	"&roadType=" +"car"+
-	"?" + new Date().getTime();
-*/    
     var glueImageArray = {
-    		roadGlueCar: "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
+    		roadGlueCar: "http://rain2.elcom.nitech.ac.jp:8080/EmmaGlueMuraseOriginal/MainServlet?" +
     		"type="+"DrawElasticRoad"+
     		"&centerLngLat="+lng+","+lat+
     		"&focus_zoom_level="+focus_zoom_level+
@@ -89,7 +46,7 @@ DrawMap.prototype.drawGlue = function (lng, lat, focus_zoom_level, context_zoom_
     		"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
     		"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
     		"&roadType=" +"car",
-    		roadGlueAll : "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
+    		roadGlueAll : "http://rain2.elcom.nitech.ac.jp:8080/EmmaGlueMuraseOriginal/MainServlet?" +
     		"type="+"DrawElasticRoad"+
     		"&centerLngLat="+lng+","+lat+
     		"&focus_zoom_level="+focus_zoom_level+
@@ -97,7 +54,7 @@ DrawMap.prototype.drawGlue = function (lng, lat, focus_zoom_level, context_zoom_
     		"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
     		"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
     		"&roadType=" +"all&isDrawPolygon=true",
-    		strokeGlue : "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
+    		strokeGlue : "http://rain2.elcom.nitech.ac.jp:8080/EmmaGlueMuraseOriginal/MainServlet?" +
     		"type="+"DrawElasticStroke_v2"+
     		"&centerLngLat="+lng+","+lat+
     		"&focus_zoom_level="+focus_zoom_level+
@@ -105,7 +62,7 @@ DrawMap.prototype.drawGlue = function (lng, lat, focus_zoom_level, context_zoom_
     		"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
     		"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
     		"&roadType=" +"car",
-    		strokeGlueConn : "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
+    		strokeGlueConn : "http://rain2.elcom.nitech.ac.jp:8080/EmmaGlueMuraseOriginal/MainServlet?" +
     		"type="+"DrawElasticStrokeConnectivity"+
     		"&centerLngLat="+lng+","+lat+
     		"&focus_zoom_level="+focus_zoom_level+
@@ -113,7 +70,7 @@ DrawMap.prototype.drawGlue = function (lng, lat, focus_zoom_level, context_zoom_
     		"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
     		"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
     		"&roadType=" +"car",
-    		mitinari : "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
+    		mitinari : "http://rain2.elcom.nitech.ac.jp:8080/EmmaGlueMuraseOriginal/MainServlet?" +
     		"type="+"DrawMitinariSenbetuAlgorithm"+
     		"&centerLngLat="+lng+","+lat+
     		"&focus_zoom_level="+focus_zoom_level+
@@ -121,7 +78,7 @@ DrawMap.prototype.drawGlue = function (lng, lat, focus_zoom_level, context_zoom_
     		"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
     		"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
     		"&roadType=" +"car",
-    		drawGlue_v2 : "http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?" +
+    		drawGlue_v2 : "http://rain2.elcom.nitech.ac.jp:8080/EmmaGlueMuraseOriginal/MainServlet?" +
     		"type="+"DrawGlue_v2"+
     		"&centerLngLat="+lng+","+lat+
     		"&focus_zoom_level="+focus_zoom_level+
@@ -133,25 +90,6 @@ DrawMap.prototype.drawGlue = function (lng, lat, focus_zoom_level, context_zoom_
     
     // ラジオボタンの選択状態でどのglueを使うか決める.
     img.src = glueImageArray[$("select[name='glue_style'] option:selected").val()];
-/*    switch($("select[name='glue_style'] option:selected").val()){
-    case "roadGlueCar":
-    	img.src = elasticRoadCar;
-    	break;
-    case "roadGlueAll":
-    	img.src = elasticRoadAll;
-    	break;
-    case "strokeGlue":
-    	img.src = elasticStroke;
-    	break;
-    case "strokeGlueConn":
-    	img.src = elasticStrokeConn;
-    	break;
-    case "mitinari":
-    	img.src = mitinari;
-    	break;
-    default:
-    }
-*/    	
     console.log(img.src);
 	// 画像読込みを待って、処理続行 
 	img.onload = function() {
@@ -160,6 +98,69 @@ DrawMap.prototype.drawGlue = function (lng, lat, focus_zoom_level, context_zoom_
 		//console.log(context.drawImage(img, 0, 0, 400, 400));
 		context.drawImage(img, 0, 0);
 	};
+};
+
+/**
+ * glueを描画(ベクターをレンダリング)
+ */
+DrawMap.prototype.drawGlue2 = function(lng, lat, focus_zoom_level, context_zoom_level){
+	console.log("drawGlue2");
+	console.log("http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?type=DrawGlue_v2" +
+			"&centerLngLat="+lng+","+lat+"" +
+			"&focus_zoom_level="+focus_zoom_level+"&context_zoom_level="+context_zoom_level+"" +
+			"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+"&roadType=car&option=vector2");
+	$.ajax({
+		type:'GET',
+		url:"http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?type=DrawGlue_v2" +
+				"&centerLngLat="+lng+","+lat+"" +
+				"&focus_zoom_level="+focus_zoom_level+"&context_zoom_level="+context_zoom_level+"" +
+				"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+"&roadType=car&option=vector2",
+		dataType:'json',
+		success: function(json){
+//			console.log("success ajax");
+			
+			// canvasで描画.
+			var canvas = document.getElementById('layer1');
+			if ( ! canvas || ! canvas.getContext ) { return false; }
+			var context = canvas.getContext('2d');
+			// 色をすべてクリアする.
+			context.fillStyle = "rgb(241,238,232)";
+			context.fillRect(0, 0, g_GlobalStaticNumber.glueOuterRadius*2, g_GlobalStaticNumber.glueOuterRadius*2);
+			//色を指定する
+			context.strokeStyle = 'rgb(00,00,00)'; //枠線の色は黒
+			context.lineWidth = 4;// 線の太さ.
+
+			for(var i=0; i<json.data.length; i++){
+//			for(var i=0; i<1; i++){
+				// 再描画.
+				var line = json.data[i].selectedTransformedPoint;
+				 //新しいパスを開始する
+				context.beginPath();
+				//パスの開始座標を指定する
+				context.moveTo(line[0].x, line[0].y);
+				
+				for(var j=1; j<line.length; j++){
+					//座標を指定してラインを引いていく
+					context.lineTo(line[j].x, line[j].y);
+//					console.info(" line "+line[j].x+"  "+ line[j].y);
+				}
+				//現在のパスを輪郭表示する
+				context.stroke();
+			}
+		},
+	 error: function(XMLHttpRequest, textStatus, errorThrown) {
+         console.log("XMLHttpRequest : " + XMLHttpRequest.status);
+         console.log("textStatus : " + textStatus);
+         console.log("errorThrown : " + errorThrown.message);
+      },
+	});
+};
+
+/**
+ * 描画
+ * @param aLine=[{x:...,y:...}, {x:...,y:...}, ...]
+ */
+DrawMap.prototype.drawLine = function(aLine){
 };
 
 /**
