@@ -1,5 +1,5 @@
 
-# Description
+# 概要
 
 <http://gitlab.yamamoto.nitech.ac.jp/murase_masaki/EmmaMurase>
 にも同じものがある．
@@ -10,6 +10,78 @@ EMMAのクライアント(Javascript)
 
 
 - ![p1](img/p1.png)
+
+# 左上のドロップダウンメニューについて
+詳しくは<http://rain.elcom.nitech.ac.jp/tsg-wiki/index.php?GlueServerOsm>を参照
+
+|値|説明|
+|--|---|
+|roadGlueCar|自動車が通れそうな道路すべて|
+|roadGlueAll|すべての道路|
+|strokeGlue|ストロークを用いて長さの長いいくつかのストローク選択|
+|strokeGlueConn|コネクティビティーを考えたもの|
+|mitinari|小関さんの道なり道路選別手法(主要な道路の選択はしていない)|
+|drawGlue_v2|村瀬提案手法|
+
+# システム概要
+![systemStructure](img/systemStructure.png)
+
+# コードの概要
+
+## コーディングルール
+
+* 注意：ES6(ES2015)ではclassを使うことができるので以下のコーディング方法は推奨しない
+
+* 1ファイル1クラスが基本
+	* 例：drawMap.jsというファイル名にはDrawMapというクラスがある
+
+* ファイル名はキャメルケース，クラス名はキャピタルケース
+
+* init.jsで各クラスのインスタンスを生成する．
+
+* クラスの書き方
+```javascript
+function ClassName(){
+	//このクラスのコンストラクタの処理
+	// var g_className = new ClassName()から呼ばれる.
+}
+ClassName.prototype={
+	methodName:fucntion(){
+		// methodNameメソッドの処理
+		// g_className.methodName()から呼ばれる
+	},
+	methodName2:fucntion(){
+	...
+	},
+}
+```
+
+* 初期処理の書き方(HTMLの読み込みが完了したら実行する)
+```javascript
+$(function(){
+	// 初期処理.
+});
+
+```
+
+## 処理の概要
+### 初期処理（HTML読み込み完了後の処理)
+1. globalStaticNumber.js
+	* グローバル変数の設定をする
+1. init.js
+	* グローバル変数の設定と各クラスをインスタンス化する
+1. initLeafLetMap.js
+	* leafletの初期処理，leafletのイベントハンドラの設定
+
+### イベント処理の注意
+イベント処理はLeafletを使ったイベント処理とjQuery,jQueryUIを使ったイベント処理があります.
+LeafLetを使ったイベントにはContextのドラッグ，ドロップによる地図の移動，Contextのマウスホイールによる拡大縮小があります．
+jQueryを用いたイベントは，Focus,Glueのドラッグ，ドロップによるFoucs位置の移動，
+Glue境界におけるGlueの大きさ変更，
+Focus,GlueのマウスホイールによるFocusの拡大縮小があります
+
+### クラスの概要
+ソースコードのコメント参照
 
 # バージョン履歴
 

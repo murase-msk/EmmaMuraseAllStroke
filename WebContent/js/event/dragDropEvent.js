@@ -7,9 +7,13 @@ function DragDropEvent(){
 	var dragDropEvent = this;
 	
 	
-	// jquery ui draggableを使ったドロップ＆ドラッグ.
-	// 複数要素を同時にドラッグ(http://uenomemo.blog31.fc2.com/blog-entry-667.html).
-	// focus glue をドラッグしたときの処理
+	/**
+	 * focus glue をドラッグしたときの処理
+	 * 
+	 * jquery ui draggableを使ったドロップ＆ドラッグ.
+	 * 複数要素を同時にドラッグ(http://uenomemo.blog31.fc2.com/blog-entry-667.html).
+	 * 
+	 */
 	$("#focus_glue_layer > :last").draggable({
 		start: function(event, ui){
 			$("#focus_glue_layer > *").each(function(){

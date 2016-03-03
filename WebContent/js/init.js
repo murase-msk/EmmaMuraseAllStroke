@@ -24,10 +24,15 @@ const GLUE_UPDATE_INTARVAL = 100;
 const FOCUS_UPDATE_INTARVAL = 100;
 /** glueの大きさ変更間隔 */
 const GLUE_CHANGE_RADIUS_INTARVAL = 100;
+/** dragDropEventクラスのグローバルなインスタンス */
 var g_dragDropEvent;
+/** mouseMoveEventクラスのグローバルなインスタンス */
 var g_mouseMoveEvent;
+/** resizeEventクラスのグローバルなインスタンス */
 var g_resizeEvent;
+/** wheelEventクラスのグローバルなインスタンス */
 var g_wheelEvent;
+/** drawMapクラスのグローバルなインスタンス */
 var g_drawMap;
 /**
  * 初期処理

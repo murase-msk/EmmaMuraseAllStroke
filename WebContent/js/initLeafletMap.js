@@ -1,12 +1,12 @@
 /**
  * 基本的な地図の描画
+ * $(function(){...});はHTML読み込み完了後，実行
  *
  */
 $(function(){
 	// 初期の地図位置スケールを指定
 	var map = L.map('map_element');
 	map.setView([35.157789, 136.93096], 15);
-	//map.setView([35.172220, 137.0845], 16);
 	
 	// 自作のOSMタイルサーバを使う.
 	var tile2Layer = L.tileLayer('http://tsgMapServer.elcom.nitech.ac.jp/osm/{z}/{x}/{y}.png', {
@@ -21,10 +21,8 @@ $(function(){
 	// レイヤーの構成
 	// ベースレイヤー(デフォルト表示).
 	var baseLayers = {
-//			"gray":grayLayer,
 			"OpenStreetMap": tileLayer,
 			"localOSM":tile2Layer,
-//			"vector":vectorGroupLayer,
 	};
 	
 	L.control.layers(baseLayers).addTo(map);
@@ -49,6 +47,7 @@ $(function(){
 	
 	/**
 	 * 各種パラメータの取得
+	 * 操作があった時に，地図の状態を保持する
 	 */
 	function getParams(){
 		g_GlobalStaticNumber.centerLngLat = {lng: map.getCenter().lng, lat: map.getCenter().lat};

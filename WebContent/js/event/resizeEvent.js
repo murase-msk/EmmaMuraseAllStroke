@@ -14,7 +14,9 @@ $(window).resize(function() {
 function ResizeEvent(){
 }
 
-// ウインドウサイズに応じてレイアウトを動的に変更
+/**
+ * ウインドウサイズに応じてレイアウトを動的に変更
+ */
 ResizeEvent.prototype.resizeWindow = function (){
 	g_GlobalStaticNumber.windowSize = {x:$(window).width(), y:$(window).height()};
 	// 地図の大きさを変える.
