@@ -2,13 +2,12 @@
 # Description
 
 <http://gitlab.yamamoto.nitech.ac.jp/murase_masaki/EmmaMurase>
-からこちらに移行した
+にも同じものがある．
 
 EMMAのクライアント(Javascript)
 
 研究室内から<http://murase.elcom.nitech.ac.jp:8080/EmmaMuraseAllStroke/>
 
-一般公開<http://52.193.53.55/emmaMurase/>
 
 - ![p1](img/p1.png)
 

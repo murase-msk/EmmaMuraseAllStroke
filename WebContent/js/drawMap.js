@@ -90,7 +90,7 @@ DrawMap.prototype.drawGlue = function (lng, lat, focus_zoom_level, context_zoom_
     
     // ラジオボタンの選択状態でどのglueを使うか決める.
     img.src = glueImageArray[$("select[name='glue_style'] option:selected").val()];
-    console.log(img.src);
+//    console.log(img.src);
 	// 画像読込みを待って、処理続行 
 	img.onload = function() {
 		//refer to http://www.html5.jp/canvas/how6.html
@@ -104,11 +104,11 @@ DrawMap.prototype.drawGlue = function (lng, lat, focus_zoom_level, context_zoom_
  * glueを描画(ベクターをレンダリング)
  */
 DrawMap.prototype.drawGlue2 = function(lng, lat, focus_zoom_level, context_zoom_level){
-	console.log("drawGlue2");
-	console.log("http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?type=DrawGlue_v2" +
-			"&centerLngLat="+lng+","+lat+"" +
-			"&focus_zoom_level="+focus_zoom_level+"&context_zoom_level="+context_zoom_level+"" +
-			"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+"&roadType=car&option=vector2");
+//	console.log("drawGlue2");
+//	console.log("http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?type=DrawGlue_v2" +
+//			"&centerLngLat="+lng+","+lat+"" +
+//			"&focus_zoom_level="+focus_zoom_level+"&context_zoom_level="+context_zoom_level+"" +
+//			"&glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+"&glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+"&roadType=car&option=vector2");
 	$.ajax({
 		type:'GET',
 		url:"http://133.68.13.112:8080/EmmaGlueMuraseOriginal/MainServlet?type=DrawGlue_v2" +
