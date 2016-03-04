@@ -6,7 +6,7 @@
 
 EMMAのクライアント(Javascript)
 
-研究室内から<http://murase.elcom.nitech.ac.jp:8080/EmmaMuraseAllStroke/>
+研究室内から<http://rain2.elcom.nitech.ac.jp:8080/EmmaMuraseAllStroke/>
 
 
 - ![p1](img/p1.png)
@@ -31,6 +31,7 @@ EMMAのクライアント(Javascript)
 ## コーディングルール
 
 * 注意：ES6(ES2015)ではclassを使うことができるので以下のコーディング方法は推奨しない
+	* 詳しくは<https://babeljs.io/docs/learn-es2015/>
 
 * 1ファイル1クラスが基本
 	* 例：drawMap.jsというファイル名にはDrawMapというクラスがある
@@ -55,13 +56,26 @@ ClassName.prototype={
 	},
 }
 ```
+または，
+```javascript
+function ClassName(){
+	//このクラスのコンストラクタの処理
+	// var g_className = new ClassName()から呼ばれる.
+}
+ClassName.prototype.methodName = function (){
+	// methodNameメソッドの処理
+	// g_className.methodName()から呼ばれる
+};
+ClassName.prototype.methodName2 = function (){
+...
+};
+```
 
 * 初期処理の書き方(HTMLの読み込みが完了したら実行する)
 ```javascript
 $(function(){
 	// 初期処理.
 });
-
 ```
 
 ## 処理の概要
@@ -78,7 +92,10 @@ $(function(){
 LeafLetを使ったイベントにはContextのドラッグ，ドロップによる地図の移動，Contextのマウスホイールによる拡大縮小があります．
 jQueryを用いたイベントは，Focus,Glueのドラッグ，ドロップによるFoucs位置の移動，
 Glue境界におけるGlueの大きさ変更，
-Focus,GlueのマウスホイールによるFocusの拡大縮小があります
+Focus,GlueのマウスホイールによるFocusの拡大縮小があります．
+
+WebContent/js/eventのフォルダにはjQuery,jQueryUIを用いたイベント処理を記述しており，
+WebContent/js/initLeafletMap.jsにはLeafletを用いた処理を記述しています．
 
 ### クラスの概要
 ソースコードのコメント参照
