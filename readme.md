@@ -14,14 +14,14 @@ EMMAのクライアント(Javascript)
 # 左上のドロップダウンメニューについて
 詳しくは<http://rain.elcom.nitech.ac.jp/tsg-wiki/index.php?GlueServerOsm>を参照
 
-| 値 | 説明 |
-| -- | -- |
-| roadGlueCar | 自動車が通れそうな道路すべて |
-| roadGlueAll | すべての道路 |
-| strokeGlue | ストロークを用いて長さの長いいくつかのストローク選択 |
-| strokeGlueConn | コネクティビティーを考えたもの |
-| mitinari | 小関さんの道なり道路選別手法(主要な道路の選択はしていない) |
-| drawGlue_v2 | 村瀬提案手法 |
+| 値             | 説明                                                       |
+| -------------- | ---------------------------------------------------------- |
+| roadGlueCar    | 自動車が通れそうな道路すべて                               |
+| roadGlueAll    | すべての道路                                               |
+| strokeGlue     | ストロークを用いて長さの長いいくつかのストローク選択       |
+| strokeGlueConn | コネクティビティーを考えたもの                             |
+| mitinari       | 小関さんの道なり道路選別手法(主要な道路の選択はしていない) |
+| drawGlue_v2    | 村瀬提案手法                                               |
 
 # システム概要
 ![systemStructure](img/systemStructure.png)
