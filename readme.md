@@ -23,6 +23,11 @@ EMMAのクライアント(Javascript)
 | mitinari       | 小関さんの道なり道路選別手法(主要な道路の選択はしていない) |
 | drawGlue_v2    | 村瀬提案手法                                               |
 
+# ソースコードの概要
+ソースコードのコメント参照
+
+/doc/index.htmlを参照
+
 # システム概要
 ![systemStructure](img/systemStructure.png)
 
@@ -83,8 +88,6 @@ Focus,GlueのマウスホイールによるFocusの拡大縮小があります�
 WebContent/js/eventのフォルダにはjQuery,jQueryUIを用いたイベント処理を記述しており，
 WebContent/js/initLeafletMap.jsにはLeafletを用いた処理を記述しています．
 
-### クラスの概要
-ソースコードのコメント参照
 
 # バージョン履歴
 
