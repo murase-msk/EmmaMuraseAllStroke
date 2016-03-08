@@ -6,7 +6,12 @@
 
 var g_GlobalStaticNumber = new GlobalStaticNumber();
 
-
+/**
+ * 初期設定
+ * @constructor 
+ * @classdesc グローバル変数の設定
+ * 
+ */
 function GlobalStaticNumber(){
 	////////////////////////
 	/////////定数////////////

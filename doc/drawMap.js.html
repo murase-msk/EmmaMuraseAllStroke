@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: drawMap.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: drawMap.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * 空の処理
+ * @constructor
+ * @classdesc 地図の描画に関するクラス
+ * 
+ */
+function DrawMap(){
+	
+	/**
+	 * focusとglueの描画
+	 */
+	this.drawFocusGlue = function(){
+		g_drawMap.drawGlue(
+				g_GlobalStaticNumber.upperLeftLngLat.lng + (g_GlobalStaticNumber.gluePositionXy.x+g_GlobalStaticNumber.glueOuterRadius) * g_GlobalStaticNumber.lnglatPer1px.lng, 
+				g_GlobalStaticNumber.upperLeftLngLat.lat - (g_GlobalStaticNumber.gluePositionXy.y+g_GlobalStaticNumber.glueOuterRadius) * g_GlobalStaticNumber.lnglatPer1px.lat,
+				g_GlobalStaticNumber.focusScale,
+				g_GlobalStaticNumber.contextScale);
+
+		g_drawMap.drawFocus(
+				g_GlobalStaticNumber.upperLeftLngLat.lng + (g_GlobalStaticNumber.gluePositionXy.x+g_GlobalStaticNumber.glueOuterRadius) * g_GlobalStaticNumber.lnglatPer1px.lng, 
+				g_GlobalStaticNumber.upperLeftLngLat.lat - (g_GlobalStaticNumber.gluePositionXy.y+g_GlobalStaticNumber.glueOuterRadius) * g_GlobalStaticNumber.lnglatPer1px.lat,
+				g_GlobalStaticNumber.focusScale);
+	};
+	
+	/**
+	 * glueの描画
+	 * @param lng {Number} 中心の経度
+	 * @param lat {Number} 中心の緯度
+	 * @param focus_zoom_level {Number} focusのズームレベル
+	 * @param context_zoom_level {Number} contextのズームレベル
+	 */
+	this.drawGlue = function (lng, lat, focus_zoom_level, context_zoom_level){
+		// 地図画像の描画.
+	    var canvas = document.getElementById('layer1');
+	    if ( ! canvas || ! canvas.getContext ) { return false; }
+	    var context = canvas.getContext('2d');
+	    var img = new Image();      //Image obj作成
+	    
+	    // 各GlueのリクエストURLを設定.
+	    var glueImageArray = {
+	    		roadGlueCar: "http://rain2.elcom.nitech.ac.jp:8080/EmmaGlueMuraseOriginal/MainServlet?" +
+	    		"type="+"DrawElasticRoad"+
+	    		"&amp;centerLngLat="+lng+","+lat+
+	    		"&amp;focus_zoom_level="+focus_zoom_level+
+	    		"&amp;context_zoom_level="+context_zoom_level+
+	    		"&amp;glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
+	    		"&amp;glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
+	    		"&amp;roadType=" +"car",
+	    		roadGlueAll : "http://rain2.elcom.nitech.ac.jp:8080/EmmaGlueMuraseOriginal/MainServlet?" +
+	    		"type="+"DrawElasticRoad"+
+	    		"&amp;centerLngLat="+lng+","+lat+
+	    		"&amp;focus_zoom_level="+focus_zoom_level+
+	    		"&amp;context_zoom_level="+context_zoom_level+
+	    		"&amp;glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
+	    		"&amp;glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
+	    		"&amp;roadType=" +"all&amp;isDrawPolygon=true",
+	    		strokeGlue : "http://rain2.elcom.nitech.ac.jp:8080/EmmaGlueMuraseOriginal/MainServlet?" +
+	    		"type="+"DrawElasticStroke_v2"+
+	    		"&amp;centerLngLat="+lng+","+lat+
+	    		"&amp;focus_zoom_level="+focus_zoom_level+
+	    		"&amp;context_zoom_level="+context_zoom_level+
+	    		"&amp;glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
+	    		"&amp;glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
+	    		"&amp;roadType=" +"car",
+	    		strokeGlueConn : "http://rain2.elcom.nitech.ac.jp:8080/EmmaGlueMuraseOriginal/MainServlet?" +
+	    		"type="+"DrawElasticStrokeConnectivity"+
+	    		"&amp;centerLngLat="+lng+","+lat+
+	    		"&amp;focus_zoom_level="+focus_zoom_level+
+	    		"&amp;context_zoom_level="+context_zoom_level+
+	    		"&amp;glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
+	    		"&amp;glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
+	    		"&amp;roadType=" +"car",
+	    		mitinari : "http://rain2.elcom.nitech.ac.jp:8080/EmmaGlueMuraseOriginal/MainServlet?" +
+	    		"type="+"DrawMitinariSenbetuAlgorithm"+
+	    		"&amp;centerLngLat="+lng+","+lat+
+	    		"&amp;focus_zoom_level="+focus_zoom_level+
+	    		"&amp;context_zoom_level="+context_zoom_level+
+	    		"&amp;glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
+	    		"&amp;glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
+	    		"&amp;roadType=" +"car",
+	    		drawGlue_v2 : "http://rain2.elcom.nitech.ac.jp:8080/EmmaGlueMuraseOriginal/MainServlet?" +
+	    		"type="+"DrawGlue_v2"+
+	    		"&amp;centerLngLat="+lng+","+lat+
+	    		"&amp;focus_zoom_level="+focus_zoom_level+
+	    		"&amp;context_zoom_level="+context_zoom_level+
+	    		"&amp;glue_inner_radius="+g_GlobalStaticNumber.glueInnerRadius+
+	    		"&amp;glue_outer_radius="+g_GlobalStaticNumber.glueOuterRadius+
+	    		"&amp;roadType=" +"car",
+	    };
+	    
+	    // ラジオボタンの選択状態でどのglueを使うか決める.
+	    img.src = glueImageArray[$("select[name='glue_style'] option:selected").val()];
+//	    console.log(img.src);
+		// 画像読込みを待って、処理続行 
+		img.onload = function() {
+			//refer to http://www.html5.jp/canvas/how6.html
+			context.scale(1,1);
+			//console.log(context.drawImage(img, 0, 0, 400, 400));
+			context.drawImage(img, 0, 0);
+		};
+	};
+
+	/**
+	 * focusの描画
+	 * @param lng {Number} 中心の経度
+	 * @param lat {Number} 中心の緯度
+	 * @param zoom_level {Number} ズームレベル
+	 */
+	this.drawFocus = function (lng, lat, zoom_level){
+		// 地図画像の描画.
+	    var canvas = document.getElementById('layer2');
+	    if ( ! canvas || ! canvas.getContext ) { return false; }
+	    var context = canvas.getContext('2d');
+	    var img = new Image();      //Image obj作成
+	    //ブラウザのcache対策 
+	    img.src = "http://rain2.elcom.nitech.ac.jp/OsmStaticMap/staticmap.php?" +
+	    		"center="+lat+","+lng+"" +
+	    		"&amp;zoom=" +zoom_level+
+	    		"&amp;size="+(g_GlobalStaticNumber.glueInnerRadius*2)+"x"+(g_GlobalStaticNumber.glueInnerRadius*2)+"" +
+	    		"&amp;maptype=mapnik_local";//+
+	    		//"?" + new Date().getTime();
+//	    console.log(img.src);
+		// 画像読込みを待って、処理続行 
+		img.onload = function() {
+			//refer to http://www.html5.jp/canvas/how6.html
+			context.scale(1,1);
+			//console.log(context.drawImage(img, 0, 0, 400, 400));
+			context.drawImage(img, 0, 0);
+		};
+	};
+}
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DragDropEvent.html">DragDropEvent</a></li><li><a href="DrawMap.html">DrawMap</a></li><li><a href="GlobalStaticNumber.html">GlobalStaticNumber</a></li><li><a href="MouseMoveEvent.html">MouseMoveEvent</a></li><li><a href="ResizeEvent.html">ResizeEvent</a></li><li><a href="WheelEvent.html">WheelEvent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#FOCUS_UPDATE_INTARVAL">FOCUS_UPDATE_INTARVAL</a></li><li><a href="global.html#g_dragDropEvent">g_dragDropEvent</a></li><li><a href="global.html#g_drawMap">g_drawMap</a></li><li><a href="global.html#g_mouseMoveEvent">g_mouseMoveEvent</a></li><li><a href="global.html#g_resizeEvent">g_resizeEvent</a></li><li><a href="global.html#g_wheelEvent">g_wheelEvent</a></li><li><a href="global.html#GLUE_CHANGE_RADIUS_INTARVAL">GLUE_CHANGE_RADIUS_INTARVAL</a></li><li><a href="global.html#GLUE_UPDATE_INTARVAL">GLUE_UPDATE_INTARVAL</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Mar 08 2016 14:39:16 GMT+0900 (東京 (標準時))
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

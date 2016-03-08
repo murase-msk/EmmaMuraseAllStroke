@@ -1,5 +1,8 @@
 /**
- * マウスホイールに関するイベント処理
+ * イベント設定
+ * @constructor 
+ * @classdesc  マウスホイールに関するイベント処理
+ * 
  */
 function WheelEvent(){
 	/**

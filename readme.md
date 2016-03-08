@@ -27,6 +27,7 @@ EMMAのクライアント(Javascript)
 ![systemStructure](img/systemStructure.png)
 
 # コードの概要
+ドキュメントは/doc/index.htmlを参照
 
 ## コーディングルール
 
@@ -45,30 +46,15 @@ EMMAのクライアント(Javascript)
 function ClassName(){
 	//このクラスのコンストラクタの処理
 	// var g_className = new ClassName()から呼ばれる.
-}
-ClassName.prototype={
-	methodName:fucntion(){
+	
+	this.methodName = function(){
 		// methodNameメソッドの処理
 		// g_className.methodName()から呼ばれる
-	},
-	methodName2:fucntion(){
-	...
-	},
+	}
+	this.methodName2 = function(){
+		...
+	}
 }
-```
-または，
-```javascript
-function ClassName(){
-	//このクラスのコンストラクタの処理
-	// var g_className = new ClassName()から呼ばれる.
-}
-ClassName.prototype.methodName = function (){
-	// methodNameメソッドの処理
-	// g_className.methodName()から呼ばれる
-};
-ClassName.prototype.methodName2 = function (){
-...
-};
 ```
 
 * 初期処理の書き方(HTMLの読み込みが完了したら実行する)

@@ -6,7 +6,8 @@
  */
 $(function(){
 // ウインドウサイズを設定する.
-ResizeEvent.prototype.resizeWindow();
+resizeEvent = new ResizeEvent();
+resizeEvent.resizeWindow();
 // 初期のglueの位置設定.
 g_GlobalStaticNumber.gluePositionXy={
 		x:(Math.floor(g_GlobalStaticNumber.windowSize.x/2)-g_GlobalStaticNumber.glueOuterRadius), 
@@ -39,6 +40,7 @@ var g_drawMap;
  */
 $(function(){
 	g_dragDropEvent = new DragDropEvent();
+	g_dragDropEvent.changeRadiusEvent();
 	g_mouseMoveEvent = new MouseMoveEvent();
 	g_resizeEvent = new ResizeEvent();
 	g_resizeEvent = new ResizeEvent();

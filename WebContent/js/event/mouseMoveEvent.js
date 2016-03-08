@@ -1,5 +1,8 @@
 /**
- * マウスの移動に関するイベント処理
+ * イベント処理の初期設定
+ * @constructor 
+ * @classdesc マウスの移動に関するイベント処理
+ * 
  */
 function MouseMoveEvent(){
 	var mouseMoveEvent = this;
@@ -29,16 +32,14 @@ function MouseMoveEvent(){
 			// glueの移動イベントをdisable
 			$("#layer3").draggable( "enable" );
 		}
-		
-		
-	})
-}
-
-MouseMoveEvent.prototype={
+	});
+	
 	/**
 	 * 円の描画
+	 * @param xy {object} 描画する座標
+	 * @param radius {Number} 半径
 	 */
-	drawCircle: function(xy, radius){
+	this.drawCircle = function(xy, radius){
 	    var canvas = document.getElementById('layer3');
 	    if ( ! canvas || ! canvas.getContext ) { return false; }
 	    var context = canvas.getContext('2d');
@@ -46,14 +47,15 @@ MouseMoveEvent.prototype={
 	    context.lineWidth = 5;
 	    context.arc(xy.x, xy.y, radius, 0, Math.PI*2, false);
 	    context.stroke();
-	},
+	};
+	
 	/**
 	 * 円の削除
 	 */
-	deleteCircle: function(){
+	this.deleteCircle = function(){
 	    var canvas = document.getElementById('layer3');
 	    if ( ! canvas || ! canvas.getContext ) { return false; }
 	    var context = canvas.getContext('2d');
 	    context.clearRect(0, 0, 3000, 3000);
-	},
-};
+	};
+}
